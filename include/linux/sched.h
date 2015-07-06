@@ -527,7 +527,7 @@ struct mempolicy;
 
 struct task_struct {
 	volatile long state;	/* -1 unrunnable, 0 runnable, >0 stopped */
-	struct thread_info *thread_info;
+	struct thread_info *thread_info;/* J:进程基本信息 */
 	atomic_t usage;
 	unsigned long flags;	/* per process flags, defined below */
 	unsigned long ptrace;
@@ -558,7 +558,7 @@ struct task_struct {
 	struct list_head ptrace_children;
 	struct list_head ptrace_list;
 
-	struct mm_struct *mm, *active_mm;
+	struct mm_struct *mm, *active_mm;/* J:指向内存区描述符的指针*/
 
 /* task state */
 	struct linux_binfmt *binfmt;
@@ -623,13 +623,13 @@ struct task_struct {
 /* CPU-specific state of this task */
 	struct thread_struct thread;
 /* filesystem information */
-	struct fs_struct *fs;
+	struct fs_struct *fs; /* J:当前目录 */
 /* open file information */
-	struct files_struct *files;
+	struct files_struct *files; /* J:指向文件描述符的指针*/
 /* namespace */
 	struct namespace *namespace;
 /* signal handlers */
-	struct signal_struct *signal;
+	struct signal_struct *signal; /* J:所接收的信号 */
 	struct sighand_struct *sighand;
 
 	sigset_t blocked, real_blocked;
